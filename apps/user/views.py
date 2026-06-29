@@ -431,14 +431,13 @@ def payment(request, order_number):
 
 def more_list(request):
     type_id = request.GET.get('type_id')
-    goods_all = Goods.objects.all()
+    # 其他类型的商品（排除当前type_id），直接在数据库层过滤，避免 while 死循环
+    other_goods = list(Goods.objects.exclude(type_id=type_id))
     rand_goods = []
-    while True:
-        if len(rand_goods) == 2:
-            break
-        good = random.choice(goods_all)
-        if good.type_id.id != type_id and good not in rand_goods:
-            rand_goods.append(good)
+    # 打乱其他商品列表并取前 2 个
+    if other_goods:
+        random.shuffle(other_goods)
+        rand_goods = other_goods[:2]
     goods = Goods.objects.filter(type_id=type_id)
     paginator = Paginator(goods, 10)
     page = request.GET.get('page', 1)
