@@ -1,0 +1,65 @@
+
+<html>
+<head>
+  <style>
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.7);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .overlay img {
+      max-width: 90%;
+      max-height: 90%;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <button onclick="enlargeImageButton('https://www.baidu.com/img/flexible/logo/pc/result.png')">放大</button>
+
+  <img src="https://www.baidu.com/img/flexible/logo/pc/result.png" alt="" id="baiduImg" onclick="enlargeImage('baiduImg')" width="200">
+  <img src="https://gips1.baidu.com/it/u=470070274,4037386004&fm=3028&app=3028&size=w931&q=75&n=0&f=PNG&fmt=auto&maxorilen2heic=2000000" alt=""
+   id="shuaigeImg" onclick="enlargeImage('shuaigeImg')" width="200">
+
+  <div class="overlay" onclick="closeOverlay()">
+    <img id="enlargedImg" src="">
+  </div>
+
+  <script>
+// button
+    function enlargeImageButton(img) {
+      var overlay = document.querySelector(".overlay");
+      var enlargedImg = document.getElementById("enlargedImg");
+
+      enlargedImg.src = img;
+      overlay.style.display = "flex";
+    }
+//   图片
+    function enlargeImage(btnId) {
+      var overlay = document.querySelector(".overlay");
+      var enlargedImg = document.getElementById("enlargedImg");
+
+      var imgUrl = document.getElementById(btnId);
+
+      enlargedImg.src = imgUrl.src;
+      console.log(imgUrl.src);
+      overlay.style.display = "flex";
+    }
+
+
+    function closeOverlay() {
+      var overlay = document.querySelector(".overlay");
+      overlay.style.display = "none";
+    }
+  </script>
+</body>
+</html>
+

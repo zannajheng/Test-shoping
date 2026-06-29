@@ -1,0 +1,97 @@
+{% extends 'user_base.html' %}
+{% load static %}
+{% block title %}订单详情{% endblock %}
+{% block content %}
+    {% if messages %}
+        <div class="messages">
+            {% for message in messages %}
+                <div id="message" {% if message.tags %} class="{{ message.tags }}"{% endif %}>
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+
+        <script>
+            setTimeout(function () {
+                document.getElementById('message').style.display = 'none';
+            }, 500);  // 5000毫秒后，消息将被隐藏
+        </script>
+    {% endif %}
+
+
+    <div class="right_content clearfix">
+        <h3 class="common_title2">全部订单</h3>
+        {% for order in orders %}
+            <ul class="order_list_th w978 clearfix">
+                <li class="col01">{{ forloop.counter }}. |&nbsp;{{ order.0.created_at }}</li>
+                <li class="col02">订单号：{{ order.0.order_number }}</li>
+                <li class="col02 stress">{{ order.0.status }}</li>
+                {% comment %}  <a href="#" order_number="{{ order.0.order_number }}" class="oper_btn order_delete">删除订单</a>{% endcomment %}
+            </ul>
+            <table class="order_list_table w980">
+                <tbody>
+                <tr>
+                    <td>
+                        {% for goods in order %}
+
+                            <ul class="order_goods_list clearfix">
+                                <li class="col01"><img src="{{ goods.sku_id.images.url }}"></li>
+                                <li class="col03">{{ goods.sku_id.count }}</li>
+                                <li class="col04">{{ goods.sku_id.total }}元</li>
+                            </ul>
+                        {% endfor %}
+                    </td>
+                    <td>{{ order.0.sum }}元</td>
+                    <td>{{ order.0.status }}</td>
+                    <td>
+                        {% if order.0.status == '已下单' %}
+                            <a href="{% url 'order_update_status' %}?order_number={{ order.0.order_number }}&status=已取消"
+                               class="oper_btn">取消订单</a>
+                        {% elif order.0.status == '已取消' %}
+                            <a href="{% url 'order_delete' %}?order_number={{ order.0.order_number }}"
+                               class="oper_btn">删除订单</a>
+                        {% elif order.0.status == '已发货' %}
+                            <a href="{% url 'order_update_status' %}?order_number={{ order.0.order_number }}&status=已收货"
+                               class="oper_btn">确认收货</a>
+                        {% elif order.0.status == '已收货' %}
+                            <a href="{% url 'order_evaluate' %}?order_number={{ order.0.order_number }}"
+                               class="oper_btn">去评价</a>
+                        {% endif %}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        {% endfor %}
+
+        <div class="pagenation">
+            {% if orders.has_previous %}
+                <a href="?page={{ orders.previous_page_number }}" id="previous">
+                    <上一页
+                </a>
+            {% else %}
+                <a href="#" id="previous" class="disabled">
+                    <上一页
+                </a>
+            {% endif %}
+
+            {% for i in orders.paginator.page_range %}
+                {% if i >= orders.number and i <= orders.number|add:4 %}
+                    {% if orders.number == i %}
+                        <a href="?page={{ i }}" class="active">{{ i }}</a>
+                    {% else %}
+                        <a href="?page={{ i }}">{{ i }}</a>
+                    {% endif %}
+                {% endif %}
+            {% endfor %}
+
+            {% if orders.has_next %}
+                <a href="?page={{ orders.next_page_number }}" id="next">下一页></a>
+            {% else %}
+                <a href="#" id="next" class="disabled">下一页></a>
+            {% endif %}
+        </div>
+
+
+    </div>
+
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends 'bade.html' %}
+{% load static %}
+{% block title %} 购物车详情 {% endblock %}
+
+{% block content %}
+
+    <div class="total_count">全部商品<em id="allitem">{{ count }}</em>件</div>
+    <ul class="cart_list_th clearfix">
+        <li class="col01">商品名称</li>
+        <li class="col02">商品单位</li>
+        <li class="col03">商品价格/元</li>
+        <li class="col04">数量</li>
+        <li class="col05">小计/元</li>
+        <li class="col06">操作</li>
+    </ul>
+    <form method="post" id="cartForm" action="">
+        {% csrf_token %}
+        {% for goods, count, total_price in goods_list %}
+            <ul class="cart_list_td clearfix" sku_id="{{ goods.id }}">
+                <li class="col01">
+                    <input type="checkbox" class="seleect" checked>&nbsp; {{ forloop.counter }}.
+                </li>
+
+                <li class="col02"><a href="{% url 'detail' sku_id=goods.id %}"><img
+                        src="{{ goods.images.url }}"></a></li>
+                <li class="col03">{{ goods.goods_name }}<br><em></em></li>
+                <li class="col04">{{ goods.cation }}</li>
+                <li class="col05" sku_id="{{ goods.id }}">{{ goods.price }}</li>
+                <li class="col06">
+                    <div class="num_add">
+                        <a href="javascript:" class="add fl" sku_id="{{ goods.id }}">+</a>
+                        <input type="text" sku_id="{{ goods.id }}" class="num_show fl" value="{{ count }}">
+                        <a href="javascript:" class="minus fl" sku_id="{{ goods.id }}">-</a>
+                    </div>
+                </li>
+
+                <li class="col07" sku_id="{{ goods.id }}">{{ total_price }}</li>
+                <li class="col08">
+                    <a href="javascript:" class="codelete" sku_id="{{ goods.id }}">删除</a>
+                </li>
+            </ul>
+        {% endfor %}
+        <div class="toast" id="toast">
+            <span class="load"></span>
+            <span>订单提交中...</span>
+        </div>
+        <div class="toast" id="toastmenet">
+            <span> <img src="{% static 'images/duihao.png' %}"/></span>
+            <span>订单提交完成</span>
+        </div>
+        <h3 class="common_title">确认收货地址</h3>
+        <div class="common_list_con clearfix">
+            <dl>
+                <dt style="color: red">收货信息填写：</dt>
+                <dd><input id="addr" class="input_text fl" style="width: 300px"  placeholder="请输入您的收货地址"></dd>
+                <dd><input id="tel" style="width: 300px" placeholder="请输入您的手机号"></dd>
+            </dl>
+        </div>
+        <ul class="settlements">
+            <li class="col01">
+                <input type="checkbox" id="seleect_all" checked>
+            </li>
+            <li class="col02">全选</li>
+            <li class="col03">合计：
+                <span>¥</span>
+                <em id="totalsum">{{ sum }}</em><br>共计
+                <b id="countsum">{{ count }}</b>件商品
+            </li>
+            <li class="col04">
+                <a href="javascript:" id="settle">确认下单</a>
+            </li>
+        </ul>
+    </form>
+{% endblock %}

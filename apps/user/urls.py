@@ -1,0 +1,38 @@
+from django.urls import path
+from apps.user import views
+
+urlpatterns = [
+    path("index/", views.index, name='index'),
+    path("detail/<int:sku_id>/", views.detail, name='detail'),
+    path("register/", views.register, name='register'),
+    path('register/sumbit/', views.register_submit),
+    path("login/", views.user_login, name='login'),
+    path('login/check/', views.login_check),
+    path("register/check/", views.register_check),
+    path('logout/', views.user_logout, name='logout'),
+    path('password/', views.password, name='password'),
+    path('cartadd/', views.cartadd),
+    path('cart/', views.cart, name='cart'),
+    path('cart/add/', views.cart_add, name='cart_add'),
+    path('cart/decr/', views.cart_decr),
+    path('cart/delete/', views.cart_delete),
+    path('order/', views.order, name='order'),
+    path('center/', views.user_center, name='user_center'),
+    path('address/', views.address, name='address'),
+    path('search/', views.search, name='search'),
+    path('search/cartadd/', views.search_cartadd),
+    path('search/page/', views.search_page),
+    path('order/payment/<str:order_number>/', views.payment, name='payment'),
+    path('index/list/', views.more_list, name='more_list'),
+    path('index/list/page/', views.more_list_page),
+    path('index/list/price/', views.more_list_price),
+    path('order/update/', views.order_update_status, name='order_update_status'),
+    path('order/delete/', views.order_delete, name='order_delete'),
+    path('order/evaluate/', views.order_evaluate, name='order_evaluate'),
+    path('order/evalute/submit/', views.order_evaluate_sumbit),
+    path('index/detail/buy/', views.index_detail_buy),
+    path('feedback/', views.feedback, name='feedback'),
+    path('feedback/upload/', views.feedback_upload),
+    path('verify/code/', views.verify_code, name = 'verifycode'),
+
+]

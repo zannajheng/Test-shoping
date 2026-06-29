@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{% block title %}首页 {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+{% if user.is_authenticated %}
+    <div class="header_con">
+        <div class="header">
+            <div class="welcome fl">首饰购物商城</div>
+            <div class="fr">
+
+                <div class="login_btn fl">
+
+                    <a href="{% url 'index' %}">首页</a>
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="{% url 'user_center' %}">个人中心</a>
+                    <span>|</span>
+                    <a href="{% url 'cart' %}">我的购物车</a>
+                    <span>|</span>
+                    <a href="{% url 'order' %}">我的订单</a>
+                    <span>|</span>
+                </div>
+                <div class="login_btn fl">
+                    欢迎登录:<em class="emsession"> {{ user.username }}</em>
+                </div>
+                <div class="login_btn fl">
+                    <span>|</span>
+                    <a href="{% url 'logout' %}">退出</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="header_con">
+        <div class="header">
+            <div class="welcome fl"></div>
+            <div class="fr">
+                <div class="login_btn fl">
+                    欢迎来到商城<em></em>
+                    <span>|</span>
+                    <a href="{% url 'login' %}">请登录</a>
+                </div>
+
+                <div class="login_btn fl">
+                    <span>|</span>
+                    <a href="{% url 'register' %}">注册</a>
+                </div>
+                <div class="login_btn fl">
+                    <span>|</span>
+                    <a href="{% url 'index' %}">首页</a>
+                </div>
+                <div class="user_link fl">
+                    <span>|</span>
+                    <a href="{% url 'user_center' %}">个人中心</a>
+                    <span>|</span>
+                    <a href="{% url 'cart' %}">我的购物车</a>
+                    <span>|</span>
+                    <a href="{% url 'order' %}">我的订单</a>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endif %}
+<div class="login_message_ajax" style="display: none"></div>
+<div class="search_bar clearfix">
+    <div class="search_con fl">
+        <form method='get' action='/user/search/'>
+            <input type="text" class="input_text fl" name="query" value="{{ query }}" placeholder="搜索首饰">
+            <input type="submit" class="input_btn fr" value="搜索">
+        </form>
+    </div>
+    <div class="guest_cart fr">
+        <div id="csrf-token">{% csrf_token %}</div>
+        <a href="{% url 'cart' %}" class="cart_name fl" id="car">我的购物车</a>
+        <div class="goods_count fl" id="show_count">{{ cart_count }}</div>
+    </div>
+</div>
+<div class="tt_toolkit">
+    <div class="tt_toolkit_list">
+        <div class="toolkit_item">
+            <a href="{% url 'index' %}">
+                <i class="toolkit_icon" style="background-image: url({% static 'images/head_list.png' %});"></i>
+                首页
+            </a>
+        </div>
+        <div class="toolkit_item">
+            <a href="{% url 'cart' %}">
+                <i class="toolkit_icon" style="background-image: url({% static 'images/cart_list.png' %});"></i>
+                购物车
+            </a>
+        </div>
+        <div class="toolkit_item">
+            <a target="_blank" href="{% url 'service' %}?number={{ number.number }}">
+                <i class="toolkit_icon" style="background-image: url({% static 'images/service_list.png' %});"></i>
+                官方客服
+            </a>
+        </div>
+        <div class="toolkit_item">
+            <a href="{% url 'feedback' %}" target="_blank">
+                <i class="toolkit_icon" style="background-image: url({% static 'images/feedback_list.png' %});"></i>
+                反馈
+            </a>
+        </div>
+        <div class="toolkit_item">
+            <a href="">
+                <i class="toolkit_icon" style="background-image: url({% static 'images/getup_list.png' %});"></i>
+                回顶部
+            </a>
+        </div>
+    </div>
+</div>
+{% block content %}{% endblock %}
+<div class="footer">
+    <p>CopyRight © 2025 首饰购物商城</p>
+    <p>电话：0739-1002920</p>
+</div>
+
+<script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/slide.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/cart.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/jquery-ui.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/user_search_page.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/more_list_page.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/detail.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+</body>
+</html>

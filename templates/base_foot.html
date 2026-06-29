@@ -1,0 +1,22 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{% block title %}登录{% endblock %}</title>
+
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+{% block content %} {% endblock %}
+<div class="footer no-mp">
+    <p>CopyRight © 2025 首饰购物商城</p>
+    <p>电话：0739-1002920</p>
+</div>
+<script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script src="{% static 'js/register.js' %}"></script>
+<script src="{% static 'js/login.js' %}"></script>
+<script src="{% static 'js/password.js' %}"></script>
+</body>
+</html>

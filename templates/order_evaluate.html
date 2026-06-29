@@ -1,0 +1,55 @@
+{% extends 'user_base.html' %}
+{% load static %}
+{% block title %}订单评价{% endblock %}
+{% block content %}
+        <div class="right_content clearfix">
+            <h3 class="common_title2">订单评价</h3>
+{#                <ul class="order_list_th w978 clearfix">#}
+{#					<li class="col01">{{order.created_at}}</li>#}
+{#					<li class="col02">订单号：{{order.order_number}}</li>#}
+{#					<li class="col02 stress">待评价</li>#}
+{#				</ul>#}
+{#            <form method="post" action="">#}
+                {% csrf_token %}
+                {# 订单id #}
+{#                <input type="hidden" name="order_id" value="{{order.order_id}}">#}
+                {# 订单中有几个商品 #}
+{#                <input type="hidden" name="total_count" value="{{order.order_skus|length}}">#}
+                {% for good in goods %}
+                      <ul class="order_list_th w978 clearfix">
+					<li class="col01">{{order.created_at}}</li>
+					<li class="col02">订单号：{{order.order_number}}</li>
+                          {% if good.evaluate == 1 %}
+					<li class="col02 stress">已评价</li>
+                      {% else %}
+                      		<li class="col02 stress">未评价</li>
+                      {% endif %}
+				</ul>
+                <table class="order_list_table w980">
+
+                    <tbody>
+                        <tr>
+                            <td width="80%">
+                                <ul class="order_goods_list clearfix">
+                                    <li class="col01"><img src="{{ good.images.url  }} "></li>
+                                    <li class="col02">{{good.goods_name}}<em>{{good.price}}/{{good.cation}}</em></li>
+                                    <li class="col03">{{good.count}}</li>
+                                </ul>
+                            </td>
+                            <td width="20%">{{good.total}}元</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="site_con">
+                    <input type="hidden" name="sku_id" value="{{ good.id }}">
+                    <div class="form_group form_group2">
+                        <label>评价内容：</label>
+                        <textarea class="site_area" name="evaluate"></textarea>
+                    </div>
+                </div>
+                {% endfor %}
+        <input type="hidden" value="{{ order.order_number }}" id="order_number">
+                <input type="submit" id="order_evaluate_sumbit" value="提交" class="info_submit">
+
+        </div>
+{% endblock %}

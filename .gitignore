@@ -1,0 +1,37 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environments
+.venv/
+venv/
+env/
+ENV/
+
+# Django
+*.log
+db.sqlite3
+db.sqlite3-journal
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Build artifacts
+_mysql_build/
+mysql-connector/
+*.egg-info/
+dist/
+build/
+
+# System files
+.DS_Store
+Thumbs.db
+
+# Media/user uploads (optional - uncomment if you don't want to track these)
+# media/

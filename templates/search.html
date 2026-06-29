@@ -1,0 +1,33 @@
+{% extends 'bade.html' %}
+{% load static %}
+{% block title %}商品详情{% endblock %}
+{% block content %}
+    <div class="breadcrumb">
+        <span id="search_a">{{ query }}</span>
+        <span>></span>
+        <a href="#">搜索结果如下:</a>
+        <div id="message" style=""></div>
+    </div>
+
+    <div class="main_wrap clearfix">
+        <ul class="goods_type_list clearfix">
+            {% for good in goods.object_list %}
+                <li>
+                    <a href="{% url 'detail' sku_id=good.id %}">
+                        <img src="{{  good.images.url  }} ">
+                    </a>
+                    <h4>
+
+                        <a class="serach_li" href="{% url 'detail' sku_id=good.id %}">{{ good.goods_name }}</a>
+                    </h4>
+                    <div class="operate">
+                        <span class="prize">金额：{{ good.price }}</span>
+                        <span class="unit">{{ good.price }}/{{ good.cation }}</span>
+                        <div class="point"></div>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>
+
+    </div>
+{% endblock %}

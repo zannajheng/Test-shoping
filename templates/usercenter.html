@@ -1,0 +1,31 @@
+{% extends 'user_base.html' %}
+{% load static %}
+{% block title %}个人中心{% endblock %}
+{% block content %}
+    <div class="right_content clearfix">
+        <div class="info_con clearfix">
+            <h3 class="common_title2">基本信息</h3>
+            <ul class="user_info_list">
+                <li><span>用户名：</span>{{ user }}</li>
+               <li>&nbsp;&nbsp;&nbsp;<a href="{% url 'password' %}" style="text-decoration: underline;">前往修改密码</a></li>
+            </ul>
+        </div>
+        <h3 class="common_title2">最近浏览</h3>
+        <div class="has_view_list">
+            <ul class="goods_type_list clearfix">
+                {% for goods in goods_list %}
+                    <li>
+                        <a href="{% url 'detail' sku_id=goods.id %}"><img src="{{  goods.images.url }}"></a>
+                        <h4><a href="{% url 'detail' sku_id=goods.id %}">{{ goods.goods_name }}</a></h4>
+                        <div class="operate">
+                            <span class="prize">￥{{ goods.price }}</span>
+                            <span class="unit">{{ goods.price }}/{{ goods.cation }}</span>
+                            <div class="point"></div>
+                        </div>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}

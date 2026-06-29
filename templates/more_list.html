@@ -1,0 +1,53 @@
+{% extends 'bade.html' %}
+{% load static %}
+{% block title %}商品列表{% endblock %}
+{% block content %}
+    <div class="main_wrap clearfix">
+        <div class="l_wrap fl clearfix">
+            <div class="new_goods">
+                <h3>新品推荐</h3>
+                <ul>
+                    {% for rand in rand_goods %}
+                        <li>
+                            <a href="{% url 'detail' sku_id=rand.id %}"><img src="{{  rand.images.url }}"></a>
+                            <h4><a href="#">{{ rand.goods_name }}</a></h4>
+                            <div class="operate">
+                                <span class="prize">￥{{ rand.price }}</span>
+                                <span class="unit">{{ rand.price }}/{{ rand.cation }}</span>
+                                <div class="point"></div>
+                                <a href="#" sku_id="{{ rand.id }}" class="more_addgoods" title="加入购物车"></a>
+                            </div>
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+
+        <div class="r_wrap fr clearfix">
+        <input type="hidden" id="more_list_type_id" value="{{ type_id }}">
+            <div class="sort_bar">
+                <a href="#" id="more_list_default" class="active">全部饰品</a>
+            </div>
+
+            <ul class="goods_type_list clearfix">
+                {% for good in goods %}
+                    <li>
+                        <a href="{% url 'detail' sku_id=good.id %}">
+                            <img src="{{ good.images.url }}">
+                        </a>
+                        <h4><a href="">{{ good.goods_name }}</a></h4>
+                        <div class="operate">
+                            <span class="prize">￥{{ good.price }}</span>
+                            <span class="unit">{{ good.price }}/{{ good.cation }}</span>
+                            <div class="point"></div>
+                          {% comment %}  <a href="#" class="more_addgoods" sku_id="{{ good.id }}" title="加入购物车"></a>{% endcomment %}
+                        </div>
+                        <input type="hidden" id="type_Id" value="{{ good.type_id_id }}">
+                    </li>
+                {% endfor %}
+            </ul>
+
+
+        </div>
+    </div>
+{% endblock %}

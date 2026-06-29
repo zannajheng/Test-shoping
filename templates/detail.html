@@ -1,0 +1,91 @@
+{% extends 'bade.html' %}
+{% load static %}
+{% block title %} 商品详情 {% endblock %}
+{% block content %}
+    <div class="goods_detail_con clearfix">
+        <div class="goods_detail_pic fl">
+            <img class="middle" src="{{ goods.images.url }}" alt="">
+            <div class="layer"></div>
+        </div>
+        <div class="goods_detail_list fr">
+            <h3>{{ goods.goods_name }}</h3>
+            <p>{{ goods.intro }}</p>
+            <div class="prize_bar">
+                <span class="show_pirze">¥<em id="unit">{{ goods.price }}</em></span>
+                <span class="show_unit">单  位:&nbsp;{{ goods.cation }}</span>
+            </div>
+            <div class="goods_num clearfix">
+                <div class="num_name fl">数 量：</div>
+                <div class="num_add fl">
+                    <input type="text" class="num_show fl" value="1" id="cart_num">
+                    <a href="javascript:" class="addfr" id="cart_add">+</a>
+                    <a href="javascript:" class="minus fr" id="cart_decr">-</a>
+                </div>
+            </div>
+
+            <div class="total">总价：
+                <em id="total">{{ goods.price }}</em>
+                <em>元</em>
+            </div>
+            <div class="operate_btn">
+              {% comment %}  <a href="javascript:" id="buy_btn" class="buy_btn">立即购买</a>{% endcomment %}
+                <div class="point"></div>
+                <a href="javascript:" sku_id="{{ goods.id }}" class="add_cart" id="add_cart">加入购物车</a>
+            </div>
+        </div>
+        <div class="tage" style="background-image: url({% static goods.images %})"></div>
+    </div>
+
+    <div class="main_wrap clearfix">
+        <div class="l_wrap fl clearfix">
+            <div class="new_goods">
+                <h3>推荐商品</h3>
+                <ul>
+                    <li>
+                        <a href="{% url 'detail' rands.id %}">
+                            <img src="{{  rands.images.url }}">
+                        </a>
+                        <h4>
+                            <a href="{% url 'detail' rands.id %}">{{ rands.goods_name }}</a>
+                        </h4>
+                        <div class="prize">￥{{ rands.price }}</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="r_wrap fr clearfix">
+            <ul class="detail_tab clearfix">
+                <li id='tag_detail' class="active">商品介绍</li>
+            </ul>
+            <div class="tab_content" id="tab_detail">
+                <dl>
+                    <dt>用户购买后评价:</dt>
+                </dl>
+            </div>
+            {% for evaluate in evaluates %}
+                <div class="reviewdiv">
+                    <div class="review_list">
+                        <div class="review">
+                            <img src="{% static 'images/review.png' %}" alt="">
+                        </div>
+                        <div class="review_time">
+                            <div class="title">{{ evaluate.user }}</div>
+                            <script src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+                            <div class="creatime">{{ evaluate.created_at }}</div>
+                        </div>
+                    </div>
+                    <div class="reviewtext">
+                        {{ evaluate.evaluate }}
+                    </div>
+                </div>
+
+
+            {% endfor %}
+
+        </div>
+    </div>
+    <script>
+
+    </script>
+{% endblock %}

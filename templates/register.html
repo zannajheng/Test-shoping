@@ -1,0 +1,42 @@
+{% extends 'base_foot.html' %}
+{% load static %}
+{% block title %}注册{% endblock %}
+{% block content %}
+    <div class="register_con">
+
+        <div class="r_con fr">
+            <div class="reg_title clearfix">
+                <h1 style="color: #1b1e34">用户注册</h1>
+                <a href="{% url 'login' %}" style="color: #CD9E6B">登录</a>
+            </div>
+            <span class="reg_form clearfix">
+                <form action="" method="post">
+                  {% csrf_token %}
+                    <ul>
+
+                        {% for item in form %}
+                            <li>
+                        <label>{{ item.label }} </label>
+                            {{ item }}
+                         <span class="error_tip">提示信息</span>
+                                {% if item.errors %}
+                                    <span class="error">
+                                        {% for error in item.errors %}
+                                            {{ error }}
+                                        {% endfor %}
+                                     </span>
+
+                                {% endif %}
+                        </li>
+                        {% endfor %}
+                        <li class="reg_sub">
+                            <input type="button" id="button" value="注 册">
+                        </li>
+                    </ul>
+                </form>
+            </span>
+        </div>
+    </div>
+
+    </div>
+{% endblock %}

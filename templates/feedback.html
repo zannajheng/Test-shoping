@@ -1,0 +1,84 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>{% block title %}首页 {% endblock %}</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.css' %}">
+</head>
+<body>
+<div class="header_con">
+    <div class="header">
+        <div class="welcome fl"></div>
+        <div class="fr">
+            <div class="login_btn fl">
+                欢迎登录:<em class="emsession"> {{ user.username }}</em>
+            </div>
+            <div class="login_btn fl">
+                <span>|</span>
+                <a href="{% url 'logout' %}">退出</a>
+            </div>
+            <div class="login_btn fl">
+                <span>|</span>
+                <a href="{% url 'index' %}">首页</a>
+            </div>
+            <div class="user_link fl">
+                <span>|</span>
+                <a href="{% url 'user_center' %}">个人中心</a>
+                <span>|</span>
+                <a href="{% url 'cart' %}">我的购物车</a>
+                <span>|</span>
+                <a href="{% url 'order' %}">我的订单</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="search_bar clearfix">
+</div>
+<div class="login_message_ajax" style="display: none">
+
+</div>
+<div class="feedback">
+    <div class="title">意见反馈</div>
+    <label>
+        <div>Hi，请输入您对
+            <spn class="black">首饰商城</spn>
+            的问题反馈或建议吧～
+        </div>
+    </label>
+    <div class="textarea_div">
+        <textarea id='textarea_name'
+                  placeholder="请描述系统使用问题（5个字以上尽量描述清楚）"></textarea>
+    </div>
+    <div class="item_span">
+        上传问题截图
+        <span class="gary">最多可以上传5张截图</span>
+    </div>
+    <div class="drag">
+        <div class="textarea_uplade">
+            <div class="uploade">可在此处粘贴、拖拽、上传多个图片</div>
+            <div class="hint"> 支持类型：JPG，JPEG，PNG，APNG，GIF，BMP</div>
+        </div>
+        <div class="float_img">
+        </div>
+    </div>
+    <div class="telephone_text">
+        联系电话
+        <span>解决过程中，方便我们与您联系</span>
+    </div>
+    <div class="telephone_input">
+        <input id="input_name" placeholder="请输入您的手机号">
+    </div>
+    <button id="button_name">提交</button>
+</div>
+<div class="footer">
+    <p>CopyRight © 2025 首饰购物商城</p>
+    <p>电话：0739-1002920</p>
+</div>
+
+<script type="text/javascript" src="{% static 'js/jquery-3.7.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/feedback.js' %}"></script>
+</body>
+</html>

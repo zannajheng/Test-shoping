@@ -1,0 +1,14 @@
+/* 隐藏首页菜单 */
+.el-menu-item[route="/"] {
+    display: none !important;
+}
+
+/* 隐藏首页面包屑 */
+.el-breadcrumb__item:first-child {
+    display: none !important;
+}
+
+/* 隐藏首页内容区域 */
+.el-main > div:first-child:not(.app-container) {
+    display: none !important;
+}

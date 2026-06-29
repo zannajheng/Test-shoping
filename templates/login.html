@@ -1,0 +1,41 @@
+{% extends 'base_foot.html' %}
+{% load static %}
+{% block content %}
+    {% if messages %}
+    <div class="login_message">
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    </div>
+    {% endif %}
+
+    <div class="login_form_bg">
+        <div class="login_form_wrap clearfix">
+
+            <div class="login_form fr">
+            <h1 style="text-align: center;font-size: 20px;margin-top: 20px;color: #5C8AEC">首饰购物商城</h1>
+                <div class="login_title clearfix">
+                    用户登录
+
+                </div>
+                <div class="form_input">
+                    <form action="" method="post" id="loginfrom">
+                        {% csrf_token %}
+                        {% for item in form %}
+                            <label>{{ item.label }}</label>
+                            {{ item }}
+                            <span class="error_tip">输入错误</span>
+                        {% endfor %}
+                        <img id='verifycode' src="{% url 'verifycode' %}" alt="CheckCode"/>
+                        <div class="more_input clearfix">
+                            <label>  <a href="{% url 'register' %}" style="color: #84B8EB;direction: ltr">立即注册</a></label>
+                            <a href="{% url 'password' %}">忘记密码</a>
+                        </div>
+                        <input type="submit" name="" value="登录" class="input_submit">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
