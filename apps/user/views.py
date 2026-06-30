@@ -256,7 +256,10 @@ def cart(request):
         goods_list = []
         sum = 0
         for i in cart:
-            goods = Goods.objects.get(id=i.sku_id)
+            try:
+                goods = Goods.objects.get(id=i.sku_id)
+            except Goods.DoesNotExist:
+                continue
             total_price = goods.price * i.count
             sum += total_price
             goods_list.append((goods, i.count, total_price))

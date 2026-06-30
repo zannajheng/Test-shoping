@@ -183,7 +183,7 @@ CREATE TABLE `auth_user`  (
 -- ----------------------------
 -- Records of auth_user
 -- ----------------------------
-INSERT INTO `auth_user` VALUES (1, 'pbkdf2_sha256$720000$njJtbrDT6sdMmilGPGOv62$RauAC4nXRhtOW8Vw92J7/8LBk4REgF4+Q3kMNGPCjTU=', '2025-08-20 17:34:48.160851', 1, 'admin', '', '', '', 1, 1, '2025-08-19 18:03:25.365536', NULL, NULL);
+INSERT INTO `auth_user` VALUES (1, 'pbkdf2_sha256$1200000$qLqzkrsR9nsbRH8f0mU7mn$6xuioucgdkQPeUqvbVPrRfCY+Vmtb0YERBl5Eb8uMwA=', '2025-08-20 17:34:48.160851', 1, 'admin', '', '', '', 1, 1, '2025-08-19 18:03:25.365536', NULL, NULL);
 INSERT INTO `auth_user` VALUES (2, 'pbkdf2_sha256$720000$oIBdG5RtBVFjznlIQKSoxe$2XGYkmgaBqrCoszGF0ysAm8qO9/CXKv/hHTW6PMXe+Y=', '2025-08-20 16:17:36.617460', 0, 'user1234', '', '', '', 0, 1, '2025-08-19 20:46:04.122951', NULL, NULL);
 
 -- ----------------------------
